@@ -1,34 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+const TMDB_API_KEY = "1ceb06f64a238e7613e019876a434837"; // not cool but ok
+const TMDB_BASE_URL =
+  "https://api.themoviedb.org/3/discover/movie?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&api_key=";
+
+import { useEffect, useState } from "react";
+import attribution from "./assets/tmdb.svg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [featureList, setFeatureList] = useState<any>({});
+
+  const fetchData = async () => {
+    setTimeout(
+      () =>
+        fetch(`${TMDB_BASE_URL}${TMDB_API_KEY}`)
+          .then((r) => r.json())
+          .then((data) => {
+            setFeatureList(data);
+          }),
+      2000
+    );
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="banner">
+        <h1>Aqui está sua lista de filmes</h1>
+        <div className="movie-list">
+          {featureList?.results?.length
+            ? featureList.results.map((m: any) => <h2>{m.original_title}</h2>)
+            : <h2>Carregando filmes populares...</h2>}
+        </div>
+        <img
+          className="attribution"
+          src={attribution}
+          alt="The Movie Database"
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

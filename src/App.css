@@ -1,42 +1,62 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.App {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.attribution {
+  margin-top: 1em;
+  height: 1em;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.movie-list {
+  height: 70%;
+  overflow: auto;
+}
+
+.banner {
+  padding: 2%;
+  padding-left: 4%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    -45deg,
+    #02c5c8,
+    #01c261,
+    #003767,
+    #02c5c8,
+    #01c261
+  );
+  background-size: 400% 400%;
+  margin: 0;
+  overflow: hidden;
+
+  animation: movingBkg 14s linear infinite;
+  -moz-animation: movingBkg 14s linear infinite;
+  -webkit-animation: movingBkg 14s linear infinite;
+}
+
+@keyframes movingBkg {
+  0% {
+    background-position: top left;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    background-position: right bottom;
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@-moz-keyframes movingBkg {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: right bottom;
   }
 }
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+@-webkit-keyframes movingBkg {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: right bottom;
+  }
 }
